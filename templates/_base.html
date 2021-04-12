@@ -35,7 +35,7 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link" href="{% url 'profile' user.pk %}">Profile
                             (<img
                                     class="avatar-navbar"
-                                    src="{{ user.avatar.url }}"
+                                    src="{% static 'images/anonymous.png' %}"
                                     alt="">)</a></li>
 
 

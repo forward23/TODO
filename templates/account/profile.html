@@ -1,12 +1,13 @@
 {% extends '_base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block title %} Profile {% endblock title %}
 
 {% block content %}
     <h1 class="text-center class="display-3"">Profile "{{ user.username }}"</h1>
     <div class="mx-auto text-center" style="width: 400px">
-        <img class="avatar-profile mb-3" src="{{ user.avatar.url }}" alt="Avatar">
+        <img class="avatar-profile mb-3" src="{% static 'images/anonymous.png' %}" alt="Avatar">
     </div>
     <div class="mx-auto" style="width: 400px">
     <form action="" method="post" enctype="multipart/form-data">
