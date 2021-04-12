@@ -1,0 +1,111 @@
+{% extends '_base.html' %}
+
+{% block title %} Todo list {% endblock title %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-outline-success btn-lg mt-3" href="{% url 'todo_create' %}">Create task</a>
+    </div>
+    <div class="d-flex justify-content-between mt-4" >
+        <h1 class="text-center display-5">Overdue Tasks :</h1>
+        <h3 >Wait:{{ overdue_not_done }}, Done:{{ overdue_done }}</h3>
+    </div>
+    <div class="mb-3">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Is done?</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for todo in overdue_tasks %}
+                {% if todo.is_done %}
+                    <tr class="table-success text-decoration-line-through">
+                        {% elif todo.due_date < now %}
+                    <tr class="table-warning">
+                        {% else %}
+                    <tr>
+                {% endif %}
+
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ todo.task }}</td>
+            <td>{{ todo.due_date }}</td>
+            <td>
+                {% if todo.is_done %}
+                    <form action="{% url 'todo_undone'  todo.pk %}" method="post">
+                        {% csrf_token %}
+
+                        <button class="btn btn-outline-secondary" type="submit">Nope</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'todo_done'  todo.pk %}" method="post">
+                        {% csrf_token %}
+
+                        <button class="btn btn-outline-success" type="submit">Done</button>
+                    </form>
+                {% endif %}
+            </td>
+            <td><a class="btn btn-danger" href="{% url 'todo_delete' todo.pk %}">X</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-between mt-5">
+        <h1 class="text-center display-5">Due Tasks :</h1>
+        <h3>Wait:{{ due_not_done }}, Done:{{ due_done }}</h3>
+    </div>
+    <div class="mt-3">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Task</th>
+                <th scope="col">Due date</th>
+                <th scope="col">Is done?</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for todo in due_tasks %}
+                {% if todo.is_done %}
+                    <tr class="table-success text-decoration-line-through">
+                        {% elif todo.due_date < now %}
+                    <tr class="table-danger">
+                        {% else %}
+                    <tr>
+                {% endif %}
+
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ todo.task }}</td>
+            <td>{{ todo.due_date }}</td>
+            <td>
+                {% if todo.is_done %}
+                    <form action="{% url 'todo_undone'  todo.pk %}" method="post">
+                        {% csrf_token %}
+
+                        <button class="btn btn-outline-secondary" type="submit">Nope</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'todo_done'  todo.pk %}" method="post">
+                        {% csrf_token %}
+
+                        <button class="btn btn-outline-success" type="submit">Done</button>
+                    </form>
+                {% endif %}
+            </td>
+            <td><a class="btn btn-danger" href="{% url 'todo_delete' todo.pk %}">X</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+{% endblock content %}

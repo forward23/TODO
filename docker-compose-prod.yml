@@ -1,0 +1,37 @@
+version: '3.7'
+services:
+
+ web:
+  build: .
+#  command: python /code/manage.py runserver 0.0.0.0:8000
+  command: gunicorn todoproject.wsgi -b 0.0.0.0:8000
+  environment:
+   - ENVIRONMENT=production
+   - SECRET_KEY=@jg!_tx%erb$p#mp2zi-f2uxm3+uhl!-ywirhuoag-wen+c83(production
+   - DEBUG=0
+   - DB_NAME=postgres_prod
+   - DB_USER=postgres
+   - DB_PASSWORD=postgres_prod
+   - DB_HOST=db
+   - DB_PORT=5432
+  ports:
+   - 8000:8000
+  depends_on:
+   - db
+
+ db:
+  image: postgres:11
+  volumes:
+   - postgres_todos_prod:/var/lib/postgresql/data/
+  environment:
+   - POSTGRES_PASSWORD=postgres_prod
+
+ adminer:
+   image: adminer
+   restart: always
+   ports:
+    - 8080:8080
+
+
+volumes:
+ postgres_todos_prod:

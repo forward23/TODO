@@ -1,0 +1,14 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %} Homepage {% endblock title %}
+
+{% block content %}
+    <header class="jumbotron my-4 mx-auto text-center">
+        <img class="header_img" src="{% static 'images/header.jpg' %}" alt="Header image">
+        <h1 class="display-3">The new TODO app!</h1>
+        <p class="lead">Enjoy our free app. It is easy and convenient to use</p>
+        <a href="{% url 'todo_list' %}" class="btn btn-success btn-lg">Start!</a>
+    </header>
+
+{% endblock content %}
