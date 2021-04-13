@@ -6,8 +6,8 @@ Also every user can create, mark and delete task.
 url: https://ancient-brook-26133.herokuapp.com/
 
 index: 
-![alt text](/home/imoiseev/Pictures/index.png)
+![alt text](https://github.com/forward23/TODO/blob/main/static/images/index.png)
 
 tasks: 
-![alt text](/home/imoiseev/Pictures/tasks.png)
+![alt text](https://github.com/forward23/TODO/blob/main/static/images/tasks.png)
 
